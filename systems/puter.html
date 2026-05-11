@@ -1,1 +1,140 @@
 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSystems | AerynOS</title>
+    <style>
+        :root {
+            --bg-color: #f9f9f9;
+            --text-color: #333;
+            --accent-color: #5277c3;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Interface de Informações (Estilo Distrosea) */
+        .details-container {
+            padding: 50px;
+            max-width: 900px;
+            position: relative;
+        }
+
+        h1 { font-size: 3rem; margin-bottom: 10px; }
+        
+        .description {
+            line-height: 1.6;
+            color: #666;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .action-area {
+            margin-top: 20px;
+        }
+
+        /* Botão Único */
+        .btn-boot {
+            background-color: #dee2e6;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-boot:hover { background-color: #ced4da; }
+
+        /* Imagem no Canto Direito */
+        .os-logo-bg {
+            position: absolute;
+            top: 50px;
+            right: -50px; /* Ajuste conforme necessário */
+            width: 300px;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        /* Container do Iframe (Escondido Inicialmente) */
+        #viewport {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: black;
+            z-index: 10000;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .btn-exit {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 10001;
+            background: rgba(255,0,0,0.7);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="info-page">
+        <div class="details-container">
+            <h1>AerynOS</h1>
+            
+            <p class="description">
+                AerynOS (anteriormente Serpent OS) é uma distribuição Linux que apresenta atualizações atômicas, 
+                um gerenciador personalizado chamado 'moss' e um sistema de construção denominado 'boulder'. 
+                O objetivo é fornecer uma experiência confiável e eficiente com tecnologias modernas.
+            </p>
+
+            <div class="action-area">
+                <p>Selecionar para experimentar online:</p>
+                <button class="btn-boot" onclick="startSystem()">INICIAR SISTEMA</button>
+                <button class="btn-boot" style="margin-left: 10px;" onclick="window.location.href='../index.html'">VOLTAR</button>
+            </div>
+
+            <img src="https://raw.githubusercontent.com/distrosea/distrosea/main/public/logos/aerynos.png" class="os-logo-bg" alt="Logo">
+        </div>
+    </div>
+
+    <div id="viewport">
+        <button class="btn-exit" onclick="stopSystem()">FECHAR [X]</button>
+        <iframe id="os-iframe" src=""></iframe>
+    </div>
+
+    <script>
+        function startSystem() {
+            const url = "https://distrosea.com/pt/select/aerynos/"; // URL do WebOS
+            document.getElementById('os-iframe').src = url;
+            document.getElementById('viewport').style.display = 'block';
+            document.getElementById('info-page').style.display = 'none';
+        }
+
+        function stopSystem() {
+            document.getElementById('os-iframe').src = '';
+            document.getElementById('viewport').style.display = 'none';
+            document.getElementById('info-page').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
