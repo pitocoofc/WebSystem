@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSystems | Hub</title>
+    <style>
+        /* --- ESTILO (CSS) --- */
+        :root {
+            --bg-color: #f9f9f9;
+            --text-color: #333;
+            --border-color: #efefef;
+            --neon-accent: #007bff;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            letter-spacing: -1px;
+        }
+
+        h1 span {
+            color: var(--neon-accent);
+        }
+
+        /* Barra de Pesquisa */
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: border 0.3s;
+        }
+
+        .search-box:focus {
+            border-color: var(--neon-accent);
+        }
+
+        /* Grid de 5 Colunas */
+        .os-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 5 colunas cravadas */
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .os-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .os-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            border-color: #ddd;
+        }
+
+        .os-card img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            pointer-events: none; /* Evita arrastar a imagem */
+        }
+
+        .os-card span {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        /* Responsividade para Celular */
+        @media (max-width: 1000px) {
+            .os-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .os-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Web<span>Systems</span></h1>
+        <input type="text" id="filterInput" class="search-box" placeholder="Pesquisar sistema operacional..." onkeyup="searchOS()">
+    </header>
+
+    <main>
+        <div class="os-grid" id="osGrid">
+            
+            <a href="systems/aerynos.html" class="os-card" data-name="aerynos">
+                <img src="https://raw.githubusercontent.com/distrosea/distrosea/main/public/logos/aerynos.png" alt="AerynOS">
+                <span>AerynOS</span>
+            </a>
+
+            <a href="systems/almalinux.html" class="os-card" data-name="alma linux">
+                <img src="https://raw.githubusercontent.com/distrosea/distrosea/main/public/logos/almalinux.png" alt="Alma Linux">
+                <span>Alma Linux</span>
+            </a>
+
+            <a href="systems/alpine.html" class="os-card" data-name="alpine linux">
+                <img src="https://raw.githubusercontent.com/distrosea/distrosea/main/public/logos/alpine.png" alt="Alpine Linux">
+                <span>Alpine Linux</span>
+            </a>
+
+            <a href="systems/arch.html" class="os-card" data-name="arch linux">
+                <img src="https://raw.githubusercontent.com/distrosea/distrosea/main/public/logos/archlinux.png" alt="Arch Linux">
+                <span>Arch Linux</span>
+            </a>
+
+            <a href="systems/nixos.html" class="os-card" data-name="nixos">
+                <img src="https://raw.githubusercontent.com/distrosea/distrosea/main/public/logos/nixos.png" alt="NixOS">
+                <span>NixOS</span>
+            </a>
+
+            <a href="systems/ubuntu.html" class="os-card" data-name="ubuntu">
+                <img src="https://raw.githubusercontent.com/distrosea/distrosea/main/public/logos/ubuntu.png" alt="Ubuntu">
+                <span>Ubuntu</span>
+            </a>
+
+        </div>
+    </main>
+
+    <script>
+        /* --- LÓGICA (JAVASCRIPT) --- */
+        function searchOS() {
+            // Pega o que o usuário digitou
+            const input = document.getElementById('filterInput').value.toLowerCase();
+            const grid = document.getElementById('osGrid');
+            const cards = grid.getElementsByClassName('os-card');
+
+            // Percorre todos os cards e filtra
+            for (let i = 0; i < cards.length; i++) {
+                const name = cards[i].getAttribute('data-name');
+                if (name.includes(input)) {
+                    cards[i].style.display = "flex"; // Mostra
+                } else {
+                    cards[i].style.display = "none"; // Esconde
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
